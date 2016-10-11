@@ -16,8 +16,9 @@ function RoombaAccessory(log, config) {
     this.blid = config["blid"];
     this.robotpwd = config["robotpwd"];
     this.name = config["name"];
+    this.robotIP = config ["robotIP"];
 
-    this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
+    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 }
 
 RoombaAccessory.prototype = {
@@ -27,7 +28,7 @@ RoombaAccessory.prototype = {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaCloud.start().then((response) => {
+            this.myRobotViaLocal.start().then((response) => {
                 //console.log(response);
                 this.log('Roomba is Running!');
                 callback();
@@ -44,7 +45,7 @@ RoombaAccessory.prototype = {
         } else {
             this.log("Roomba Pause & Dock!");
 
-            this.myRobotViaCloud.pause().then((response) => {
+            this.myRobotViaLocal.pause().then((response) => {
                 //console.log(response);
                 this.log('Roomba is Paused!');
 
@@ -54,7 +55,7 @@ RoombaAccessory.prototype = {
                             this.log('Roomba Checking the Status!');
 
 
-                            this.myRobotViaCloud.getStatus().then((function (data) {
+                            this.myRobotViaLocal.getStatus().then((function (data) {
 
                                 //console.log(data);
                                 
@@ -63,9 +64,9 @@ RoombaAccessory.prototype = {
                                 switch (status.phase) {
                                     case "stop":
 
-                                        var myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
+                                        var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 
-                                        this.myRobotViaCloud.dock().then(((response) => {
+                                        this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
                                             callback();
 
