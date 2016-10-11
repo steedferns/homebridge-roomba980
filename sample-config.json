@@ -15,7 +15,8 @@
             "accessory": "Roomba980",
             "name": "Roomba",
             "blid":"123456789abcdefg",
-            "robotpwd":"abcdefghijklmnop"
+            "robotpwd":"abcdefghijklmnop",
+            "robotIP": "192.168.x.x"
         }
     ]
 }
