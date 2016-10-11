@@ -2,7 +2,6 @@
   "name": "homebridge-roomba980",
   "version": "0.0.1",
   "description": "Roomba980 for homebridge",
-  "license": "ISC",
   "keywords": [
     "homebridge-plugin"
   ],
