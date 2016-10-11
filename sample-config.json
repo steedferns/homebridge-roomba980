@@ -6,13 +6,13 @@
         "pin": "031-45-156"
     },
 
-    "description": "for Roomba980",
+    "description": "Homebridge for Roomba980",
 
     "platforms": [],
 
     "accessories": [
         {
-            "accessory": "Roomba",
+            "accessory": "Roomba980",
             "name": "Roomba",
             "blid":"123456789abcdefg",
             "robotpwd":"abcdefghijklmnop"
