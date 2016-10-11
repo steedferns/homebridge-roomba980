@@ -6,7 +6,7 @@ var dorita980 = require('dorita980');
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory("homebridge-roomba", "Roomba", RoombaAccessory);
+    homebridge.registerAccessory("homebridge-roomba980", "Roomba980", RoombaAccessory);
 }
 
 
