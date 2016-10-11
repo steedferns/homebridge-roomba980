@@ -66,9 +66,9 @@ RoombaAccessory.prototype = {
                                 switch (status.ok.phase) {
                                     case "stop":
 
-                                        var myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
+                                        //var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 
-                                        this.myRobotViaCloud.dock().then(((response) => {
+                                        this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
                                             callback();
 
