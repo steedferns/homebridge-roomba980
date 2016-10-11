@@ -55,13 +55,14 @@ RoombaAccessory.prototype = {
                             this.log('Roomba Checking the Status!');
 
 
-                            this.myRobotViaLocal.getStatus().then((function (data) {
+                            this.myRobotViaLocal.getMission().then((function (data) {
 
-                                //console.log(data);
+                                var newData = JSON.stringify(data);
+                                var status = JSON.parse(newData);
+
+                                //console.log (status.ok.phase);
                                 
-                                var status = JSON.parse(data.robot_status);
-
-                                switch (status.phase) {
+                                switch (status.ok.phase) {
                                     case "stop":
 
                                         var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
