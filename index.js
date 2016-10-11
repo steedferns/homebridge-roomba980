@@ -18,7 +18,7 @@ function RoombaAccessory(log, config) {
     this.name = config["name"];
     this.robotIP = config ["robotIP"];
 
-    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+    this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
 }
 
 RoombaAccessory.prototype = {
@@ -28,7 +28,7 @@ RoombaAccessory.prototype = {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaLocal.start().then((response) => {
+            this.myRobotViaCloud.start().then((response) => {
                 //console.log(response);
                 this.log('Roomba is Running!');
                 callback();
@@ -65,9 +65,9 @@ RoombaAccessory.prototype = {
                                 switch (status.ok.phase) {
                                     case "stop":
 
-                                        var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+                                        var myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
 
-                                        this.myRobotViaLocal.dock().then(((response) => {
+                                        this.myRobotViaCloud.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
                                             callback();
 
