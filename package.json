@@ -1,0 +1,24 @@
+{
+  "name": "homebridge-roomba",
+  "version": "0.0.1",
+  "description": "Roomba980 for homebridge",
+  "license": "ISC",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": {
+    "name": "steedferns"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/steedferns/homebridge-roomba980"
+  },
+  "dependencies": {
+    "request": "^2.65.0",
+    "dorita980": "2.4.0"
+  }
+}
