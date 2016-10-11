@@ -80,11 +80,11 @@ RoombaAccessory.prototype = {
 
                                         break;
                                     case "run":
-                                        this.log('Roomba is still Running... Wait a 3sec.');
+                                        this.log('Roomba is still Running... Waiting 3 seconds.');
                                         checkStatus(3000);
                                         break;
                                     default:
-                                        this.log('Roomba is not Running...You Please Help.');
+                                        this.log('Roomba is not Running....');
                                         callback();
                                         break;
                                 }
