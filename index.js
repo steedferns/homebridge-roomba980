@@ -1,5 +1,4 @@
 var Service, Characteristic;
-var request = require('request');
 var dorita980 = require('dorita980');
 
 
@@ -16,7 +15,6 @@ function RoombaAccessory(log, config) {
     // url info
     this.blid = config["blid"];
     this.robotpwd = config["robotpwd"];
-    this.irobotapi = 'https://irobot.axeda.com/services/v1/rest/Scripto/execute/AspenApiRequest';
     this.name = config["name"];
 
     this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
