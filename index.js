@@ -46,7 +46,7 @@ RoombaAccessory.prototype = {
         } else {
             this.log("Roomba Pause & Dock!");
 
-            this.myRobotViaLocal.pause().then((response) => {
+            this.myRobotViaCloud.pause().then((response) => {
                 //console.log(response);
                 this.log('Roomba is Paused!');
 
