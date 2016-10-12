@@ -12,7 +12,6 @@ module.exports = function (homebridge) {
 function RoombaAccessory(log, config) {
     this.log = log;
 
-    // url info
     this.blid = config["blid"];
     this.robotpwd = config["robotpwd"];
     this.name = config["name"];
