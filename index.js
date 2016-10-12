@@ -50,6 +50,8 @@ RoombaAccessory.prototype = {
                 //console.log(response);
                 this.log('Roomba is Paused!');
 
+                callback();
+                
                 var checkStatus = function (time) {
                     setTimeout(
                         function () {
