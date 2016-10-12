@@ -1,6 +1,6 @@
 {
   "name": "homebridge-roomba980",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Roomba980 for homebridge",
   "keywords": [
     "homebridge-plugin"
@@ -17,7 +17,6 @@
     "url": "git://github.com/steedferns/homebridge-roomba980"
   },
   "dependencies": {
-    "request": "^2.65.0",
     "dorita980": "2.4.0"
   }
 }
