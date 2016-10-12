@@ -34,12 +34,10 @@ RoombaAccessory.prototype = {
                 callback();
 
             }).catch((err) => {
-
                 this.log('Roomba Failed: %s', err.message);
                 this.log(response);
-
                 callback(err);
-
+                
             });
 
         } else {
