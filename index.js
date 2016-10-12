@@ -29,8 +29,7 @@ RoombaAccessory.prototype = {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaCloud.start().then((response) => {
-                //console.log(response);
+            this.myRobotViaCloud.start().then((response) => {         
                 this.log('Roomba is Running!');
                 callback();
 
@@ -47,42 +46,35 @@ RoombaAccessory.prototype = {
             this.log("Roomba Pause & Dock!");
 
             this.myRobotViaCloud.pause().then((response) => {
-                //console.log(response);
                 this.log('Roomba is Paused!');
-
-                callback(); //we call back so Siri can show success. However we still have to dock.
                 
+                //We call back so Siri can show success. 
+                callback();              
+                
+                //We still have to dock!         
                 var checkStatus = function (time) {
                     setTimeout(
                         function () {
                             this.log('Roomba Checking the Status!');
 
-
                             this.myRobotViaLocal.getMission().then((function (data) {
 
-                                var newData = JSON.stringify(data);
-                                var status = JSON.parse(newData);
+                                var jsonData = JSON.stringify(data);
+                                var status = JSON.parse(jsonData);
 
                                 //console.log (status.ok.phase);
                                 
                                 switch (status.ok.phase) {
                                     case "stop":
-
-                                        //var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
-
                                         this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
                                             //callback();
-
                                         }).bind(this)).catch((err) => {
-
                                             this.log('Roomba Failed: %s', err.message);
                                             this.log(response);
                                             console.log(err);
-                                            //callback(err);
-                                            
+                                            //callback(err);                                           
                                         });
-
                                         break;
                                     case "run":
                                         this.log('Roomba is still Running... Waiting 1 second.');
