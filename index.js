@@ -50,7 +50,7 @@ RoombaAccessory.prototype = {
                 //console.log(response);
                 this.log('Roomba is Paused!');
 
-                callback();
+                callback(); //we call back so Siri can show success. However we still have to dock.
                 
                 var checkStatus = function (time) {
                     setTimeout(
@@ -72,14 +72,14 @@ RoombaAccessory.prototype = {
 
                                         this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
-                                            callback();
+                                            //callback();
 
                                         }).bind(this)).catch((err) => {
 
                                             this.log('Roomba Failed: %s', err.message);
                                             this.log(response);
                                             console.log(err);
-                                            callback(err);
+                                            //callback(err);
                                             
                                         });
 
@@ -90,7 +90,7 @@ RoombaAccessory.prototype = {
                                         break;
                                     default:
                                         this.log('Roomba is not Running....');
-                                        callback();
+                                        //callback();
                                         break;
                                 }
 
