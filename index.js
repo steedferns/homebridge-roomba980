@@ -53,7 +53,7 @@ RoombaAccessory.prototype = {
                 var checkStatus = function (time) {
                     setTimeout(
                         function () {
-                            this.log('Roomba Checking the Status!');
+                            this.log('Checking Roomba Status..');
 
                             this.myRobotViaLocal.getMission().then((function (data) {
 
@@ -75,8 +75,8 @@ RoombaAccessory.prototype = {
                                         });
                                         break;
                                     case "run":
-                                        this.log('Roomba is still Running... Waiting 1 second.');
-                                        checkStatus(1000);
+                                        this.log('Roomba is still Running... Waiting 3 seconds');
+                                        checkStatus(3000);
                                         break;
                                     default:
                                         this.log('Roomba is not Running....');
@@ -91,7 +91,7 @@ RoombaAccessory.prototype = {
                         }.bind(this), time
                     );
                 }.bind(this);
-                checkStatus(1000);
+                checkStatus(3000);
 
 
             }).catch((err) => {
