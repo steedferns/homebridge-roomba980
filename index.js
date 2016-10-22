@@ -12,10 +12,11 @@ module.exports = function (homebridge) {
 function RoombaAccessory(log, config) {
     this.log = log;
 
+    // url info
     this.blid = config["blid"];
     this.robotpwd = config["robotpwd"];
     this.name = config["name"];
-    this.robotIP = config ["robotIP"];
+    this.robotIP = config["robotIP"];
 
     this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
     this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
@@ -23,12 +24,36 @@ function RoombaAccessory(log, config) {
 
 RoombaAccessory.prototype = {
 
- 
+    getPowerState: function (callback) {
+   
+        this.log("Getting " + this.name + " power state");
+
+        this.myRobotViaLocal.getMission().then((function (data) {
+
+            var jsonData = JSON.stringify(data);
+            var status = JSON.parse(jsonData);
+
+            switch (status.ok.phase) {
+                case "run":
+                    this.log('Roomba is running');
+                    callback(null, 1);
+                    break;
+                default:
+                    this.log('Roomba is not running');
+                    callback(null, 0);
+                    break;
+            }
+
+        }).bind(this)).catch(function (err) {
+            console.error(err);
+        });
+    },
+
     setPowerState: function (powerOn, callback) {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaCloud.start().then((response) => {         
+            this.myRobotViaCloud.start().then((response) => {
                 this.log('Roomba is Running!');
                 callback();
 
@@ -36,7 +61,7 @@ RoombaAccessory.prototype = {
                 this.log('Roomba Failed: %s', err.message);
                 this.log(response);
                 callback(err);
-                
+
             });
 
         } else {
@@ -44,10 +69,10 @@ RoombaAccessory.prototype = {
 
             this.myRobotViaCloud.pause().then((response) => {
                 this.log('Roomba is Paused!');
-                
+
                 //We call back so Siri can show success. 
-                callback();              
-                
+                callback();
+
                 //We still have to dock!         
                 var checkStatus = function (time) {
                     setTimeout(
@@ -60,7 +85,7 @@ RoombaAccessory.prototype = {
                                 var status = JSON.parse(jsonData);
 
                                 //console.log (status.ok.phase);
-                                
+
                                 switch (status.ok.phase) {
                                     case "stop":
                                         this.myRobotViaLocal.dock().then(((response) => {
@@ -119,6 +144,7 @@ RoombaAccessory.prototype = {
         var switchService = new Service.Switch(this.name);
         switchService
             .getCharacteristic(Characteristic.On)
+            .on('get', this.getPowerState.bind(this))
             .on('set', this.setPowerState.bind(this));
 
         return [switchService];
