@@ -25,15 +25,12 @@ function RoombaAccessory(log, config) {
 RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
-   
-        //this.log("Getting " + this.name + " power state");
 
-        this.myRobotViaLocal.getMission().then((function (data) {
+        this.myRobotViaCloud.getStatus().then((function (data) {
 
-            var jsonData = JSON.stringify(data);
-            var status = JSON.parse(jsonData);
+            var status = JSON.parse(data.robot_status);
 
-            switch (status.ok.phase) {
+            switch (status.phase) {
                 case "run":
                     this.log('Roomba is running');
                     callback(null, 1);
