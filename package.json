@@ -17,6 +17,6 @@
     "url": "git://github.com/steedferns/homebridge-roomba980"
   },
   "dependencies": {
-    "dorita980": "3.0.5"
+    "dorita980": "3.0.6"
   }
 }
