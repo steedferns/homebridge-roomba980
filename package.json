@@ -1,6 +1,6 @@
 {
   "name": "homebridge-roomba980",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Roomba980 for homebridge",
   "keywords": [
     "homebridge-plugin"
