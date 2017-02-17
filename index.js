@@ -28,7 +28,8 @@ RoombaAccessory.prototype = {
 
         this.myRobotViaLocal.getMission().then((function (data) {
             this.log(data);
-            var status = JSON.parse(data);
+            var jsonData = JSON.stringify(data);
+            var status = JSON.parse(jsonData);
             this.log(status.cleanMissionStatus);
             switch (status.cleanMissionStatus.phase) {
                 case "run":
