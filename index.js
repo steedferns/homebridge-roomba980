@@ -27,10 +27,10 @@ RoombaAccessory.prototype = {
     getPowerState: function (callback) {
 
         this.myRobotViaLocal.getMission().then((function (data) {
-            this.log(data);
             var jsonData = JSON.stringify(data);
             var status = JSON.parse(jsonData);
-            this.log(status.cleanMissionStatus);
+            //this.log(status.cleanMissionStatus);
+            
             switch (status.cleanMissionStatus.phase) {
                 case "run":
                     this.log('Roomba is running');
@@ -84,7 +84,7 @@ RoombaAccessory.prototype = {
 
                                 //console.log (cleanMissionStatus.phase);
 
-                                switch (cleanMissionStatus.phase) {
+                                switch (status.cleanMissionStatus.phase) {
                                     case "stop":
                                         this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
