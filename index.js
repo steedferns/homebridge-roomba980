@@ -18,7 +18,7 @@ function RoombaAccessory(log, config) {
     this.name = config["name"];
     this.robotIP = config["robotIP"];
 
-    this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
+    //this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
     this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 }
 
@@ -26,7 +26,7 @@ RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
 
-        this.myRobotViaCloud.getStatus().then((function (data) {
+        this.myRobotViaLocal.getStatus().then((function (data) {
 
             var status = JSON.parse(data.robot_status);
 
@@ -50,7 +50,7 @@ RoombaAccessory.prototype = {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaCloud.start().then((response) => {
+            this.myRobotViaLocal.start().then((response) => {
                 this.log('Roomba is Running!');
                 callback();
 
@@ -64,7 +64,7 @@ RoombaAccessory.prototype = {
         } else {
             this.log("Roomba Pause & Dock!");
 
-            this.myRobotViaCloud.pause().then((response) => {
+            this.myRobotViaLocal.pause().then((response) => {
                 this.log('Roomba is Paused!');
 
                 //We call back so Siri can show success. 
