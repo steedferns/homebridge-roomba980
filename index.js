@@ -26,7 +26,7 @@ RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
 
-        this.myRobotViaLocal.getStatus().then((function (data) {
+        this.myRobotViaLocal.getMission().then((function (data) {
 
             var status = JSON.parse(data.robot_status);
 
