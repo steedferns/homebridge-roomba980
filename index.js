@@ -19,13 +19,15 @@ function RoombaAccessory(log, config) {
     this.robotIP = config["robotIP"];
 
     // this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
-    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+    //this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 }
 
 RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
 
+	this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+	    
         this.myRobotViaLocal.getMission().then((function (status) {
             this.myRobotViaLocal.end();
 
@@ -48,7 +50,9 @@ RoombaAccessory.prototype = {
     setPowerState: function (powerOn, callback) {
         if (powerOn) {
             this.log("Roomba Start!");
-
+		
+	    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+		
             this.myRobotViaLocal.on('connect', function () {
                 this.myRobotViaLocal.start().then((response) => {
                     this.myRobotViaLocal.end();
@@ -65,7 +69,9 @@ RoombaAccessory.prototype = {
 
         } else {
             this.log("Roomba Pause & Dock!");
-
+		
+	    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+		
             this.myRobotViaLocal.on('connect', function () {
                 this.myRobotViaLocal.pause().then((response) => {
                     this.log('Roomba is Paused!');
