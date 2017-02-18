@@ -18,7 +18,7 @@ function RoombaAccessory(log, config) {
     this.name = config["name"];
     this.robotIP = config["robotIP"];
 
-    this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
+    //this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
     this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 }
 
@@ -26,11 +26,12 @@ RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
 
-        this.myRobotViaCloud.getStatus().then((function (data) {
-
-            var status = JSON.parse(data.robot_status);
-
-            switch (status.phase) {
+        this.myRobotViaLocal.getMission().then((function (data) {
+            var jsonData = JSON.stringify(data);
+            var status = JSON.parse(jsonData);
+            //this.log(status.cleanMissionStatus);
+            
+            switch (status.cleanMissionStatus.phase) {
                 case "run":
                     this.log('Roomba is running');
                     callback(null, 1);
@@ -50,7 +51,7 @@ RoombaAccessory.prototype = {
         if (powerOn) {
             this.log("Roomba Start!");
 
-            this.myRobotViaCloud.start().then((response) => {
+            this.myRobotViaLocal.start().then((response) => {
                 this.log('Roomba is Running!');
                 callback();
 
@@ -64,7 +65,7 @@ RoombaAccessory.prototype = {
         } else {
             this.log("Roomba Pause & Dock!");
 
-            this.myRobotViaCloud.pause().then((response) => {
+            this.myRobotViaLocal.pause().then((response) => {
                 this.log('Roomba is Paused!');
 
                 //We call back so Siri can show success. 
@@ -81,9 +82,9 @@ RoombaAccessory.prototype = {
                                 var jsonData = JSON.stringify(data);
                                 var status = JSON.parse(jsonData);
 
-                                //console.log (status.ok.phase);
+                                //console.log (cleanMissionStatus.phase);
 
-                                switch (status.ok.phase) {
+                                switch (status.cleanMissionStatus.phase) {
                                     case "stop":
                                         this.myRobotViaLocal.dock().then(((response) => {
                                             this.log('Roomba Docking! Goodbye!');
