@@ -19,7 +19,7 @@ function RoombaAccessory(log, config) {
     this.robotIP = config["robotIP"];
 
     // this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
-    //this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
+    this.myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
 }
 
 RoombaAccessory.prototype = {
