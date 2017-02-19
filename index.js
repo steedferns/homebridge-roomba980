@@ -59,12 +59,12 @@ RoombaAccessory.prototype = {
                 myRobotViaLocal.start().then((response) => {
                     myRobotViaLocal.end();
                     log('Roomba is Running!');
-                    //log(response);
+                    log(response);
                     callback();
 
                 }).catch((err) => {
                     log('Roomba Failed: %s', err.message);
-                    //log(response);
+                    log(response);
                     callback(err);
 
                 });
@@ -88,7 +88,7 @@ RoombaAccessory.prototype = {
 
                                 myRobotViaLocal.getMission().then((function (status) {
 
-                                    //console.log (status.cleanMissionStatus.phase);
+                                    console.log (status.cleanMissionStatus.phase);
 
                                     switch (status.cleanMissionStatus.phase) {
                                         case "stop":
@@ -110,7 +110,7 @@ RoombaAccessory.prototype = {
                                         default:
                                             myRobotViaLocal.end();
                                             log('Roomba is not Running....');
-                                            callback();
+                                            //callback();
                                             break;
                                     }
 
