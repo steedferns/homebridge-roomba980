@@ -17,18 +17,15 @@ function RoombaAccessory(log, config) {
     this.robotpwd = config["robotpwd"];
     this.name = config["name"];
     this.robotIP = config["robotIP"];
-
-    // this.myRobotViaCloud = new dorita980.Cloud(this.blid, this.robotpwd);
 }
 
 RoombaAccessory.prototype = {
 
     getPowerState: function (callback) {
         var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
-		var log = this.log;
+        var log = this.log;
 
         myRobotViaLocal.getMission().then((function (status) {
-            myRobotViaLocal.end();
 
             switch (status.cleanMissionStatus.phase) {
                 case "run":
@@ -41,14 +38,19 @@ RoombaAccessory.prototype = {
                     break;
             }
 
+            myRobotViaLocal.end();
+
         })).catch(function (err) {
             console.error(err);
+            myRobotViaLocal.end();
+
         });
+
     },
 
     setPowerState: function (powerOn, callback) {
         var myRobotViaLocal = new dorita980.Local(this.blid, this.robotpwd, this.robotIP);
-		var log = this.log;
+        var log = this.log;
 
         if (powerOn) {
             log("Roomba Start!");
@@ -57,11 +59,12 @@ RoombaAccessory.prototype = {
                 myRobotViaLocal.start().then((response) => {
                     myRobotViaLocal.end();
                     log('Roomba is Running!');
+                    //log(response);
                     callback();
 
                 }).catch((err) => {
                     log('Roomba Failed: %s', err.message);
-                    log(response);
+                    //log(response);
                     callback(err);
 
                 });
@@ -92,12 +95,12 @@ RoombaAccessory.prototype = {
                                             myRobotViaLocal.dock().then(((response) => {
                                                 myRobotViaLocal.end();
                                                 log('Roomba Docking! Goodbye!');
-                                                //callback();
+                                                callback();
                                             })).catch((err) => {
                                                 log('Roomba Failed: %s', err.message);
                                                 log(response);
                                                 console.log(err);
-                                                //callback(err);
+                                                callback(err);
                                             });
                                             break;
                                         case "run":
@@ -107,7 +110,7 @@ RoombaAccessory.prototype = {
                                         default:
                                             myRobotViaLocal.end();
                                             log('Roomba is not Running....');
-                                            //callback();
+                                            callback();
                                             break;
                                     }
 
@@ -127,7 +130,7 @@ RoombaAccessory.prototype = {
                     callback(err);
 
                 });
-			});
+            });
         }
     },
 
