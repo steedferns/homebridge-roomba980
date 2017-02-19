@@ -95,12 +95,12 @@ RoombaAccessory.prototype = {
                                             myRobotViaLocal.dock().then(((response) => {
                                                 myRobotViaLocal.end();
                                                 log('Roomba Docking! Goodbye!');
-                                                callback();
+                                                //callback();
                                             })).catch((err) => {
                                                 log('Roomba Failed: %s', err.message);
                                                 log(response);
                                                 console.log(err);
-                                                callback(err);
+                                                //callback(err);
                                             });
                                             break;
                                         case "run":
